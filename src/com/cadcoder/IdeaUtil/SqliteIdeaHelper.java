@@ -4,10 +4,10 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class SqliteIdeaHelper extends SQLiteOpenHelper {
+public class SQLiteIdeaHelper extends SQLiteOpenHelper {
 
-    public SqliteIdeaHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
+    public SQLiteIdeaHelper(Context context) {
+        super(context, DATABASE, null, DATABASE_VERSION);
     }
 
     public static final String TABLE_NAME = "ideas";

@@ -5,13 +5,13 @@ import android.test.AndroidTestCase;
 /**
  * Created by Xander on 31/03/2014.
  */
-public class SqliteIdeaHelperTest extends AndroidTestCase {
+public class SQLiteIdeaHelperTest extends AndroidTestCase {
 
     public void testColumnNames() throws Exception {
-        assertEquals("id", SqliteIdeaHelper.COLUMN_ID);
-        assertEquals("title", SqliteIdeaHelper.COLUMN_TITLE);
-        assertEquals("description", SqliteIdeaHelper.COLUMN_DESCRIPTION);
-        assertEquals("created", SqliteIdeaHelper.COLUMN_CREATED);
-        assertEquals("modified", SqliteIdeaHelper.COLUMN_MODIFIED);
+        assertEquals("id", SQLiteIdeaHelper.COLUMN_ID);
+        assertEquals("title", SQLiteIdeaHelper.COLUMN_TITLE);
+        assertEquals("description", SQLiteIdeaHelper.COLUMN_DESCRIPTION);
+        assertEquals("created", SQLiteIdeaHelper.COLUMN_CREATED);
+        assertEquals("modified", SQLiteIdeaHelper.COLUMN_MODIFIED);
     }
 }

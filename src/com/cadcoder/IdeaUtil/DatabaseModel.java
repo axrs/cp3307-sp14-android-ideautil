@@ -4,7 +4,7 @@ import java.util.Date;
 
 
 public class DatabaseModel {
-    private int _id = -1;
+    private long _id = -1;
     private Date _created;
     private Date _modified;
 
@@ -16,11 +16,11 @@ public class DatabaseModel {
         _modified = d;
     }
 
-    public int getId() {
+    public long getId() {
         return _id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         if (id >= 0) {
             _id = id;
         }
@@ -41,6 +41,10 @@ public class DatabaseModel {
     public void setModified() {
         this._modified = new Date();
         _isDirty = true;
+    }
+
+    public void setModified(Date created) {
+        this._modified = created;
     }
 
     public Boolean isDirty() {

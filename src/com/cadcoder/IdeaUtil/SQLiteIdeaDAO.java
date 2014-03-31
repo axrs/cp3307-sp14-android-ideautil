@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -30,7 +29,7 @@ public class SQLiteIdeaDAO {
         _helper = new SQLiteIdeaHelper(context);
     }
 
-    public void open() throws SQLException {
+    public void open() {
         _db = _helper.getWritableDatabase();
     }
 
@@ -62,8 +61,8 @@ public class SQLiteIdeaDAO {
 
         long insertedId = _db.insert(SQLiteIdeaHelper.TABLE_NAME, null, values);
 
-        Cursor cursor = _db.query(SQLiteIdeaHelper.TABLE_NAME, _columns, SQLiteIdeaHelper.COLUMN_ID + "=" + insertedId, null, null, null, null);
-
+        Cursor cursor = _db.query(SQLiteIdeaHelper.TABLE_NAME, _columns, SQLiteIdeaHelper.COLUMN_ID + " = " + insertedId, null, null, null, null);
+        cursor.moveToFirst();
         IdeaModel outModel = createFromRecord(cursor);
         cursor.close();
         return outModel;
@@ -76,7 +75,7 @@ public class SQLiteIdeaDAO {
     private IdeaModel createFromRecord(Cursor cursor) {
         IdeaModel model = new IdeaModel();
 
-        model.setId(cursor.getInt(0));
+        model.setId(cursor.getLong(0));
         model.setTitle(cursor.getString(1));
         model.setDescription(cursor.getString(2));
         model.setCreated(formatDate(cursor.getString(3)));

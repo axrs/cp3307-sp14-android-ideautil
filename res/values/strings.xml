@@ -2,4 +2,10 @@
 <resources>
     <string name="app_name">IdeaUtil</string>
     <string name="add_task">AddTask</string>
+    <string name="title">Title:</string>
+    <string name="create_task">Create Task</string>
+    <string name="description">Description:</string>
+    <string name="save">Save</string>
+    <string name="title_hint">Task Title</string>
+    <string name="description_hint">Task Description</string>
 </resources>

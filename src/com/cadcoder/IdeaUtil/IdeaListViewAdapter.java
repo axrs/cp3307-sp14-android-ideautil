@@ -8,30 +8,27 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.util.List;
+import java.text.SimpleDateFormat;
 
 public class IdeaListViewAdapter extends BaseAdapter {
     private Context _context;
 
-    List<IdeaModel> _models;
 
-    public IdeaListViewAdapter(Context _context, List<IdeaModel> _models) {
+    SQLiteIdeaDAO _dao;
+
+    public IdeaListViewAdapter(Context _context) {
         this._context = _context;
-        this._models = _models;
-    }
-
-    public void setModels(List<IdeaModel> models) {
-        _models = models;
+        _dao = SQLiteIdeaDAO.getInstance(_context);
     }
 
     @Override
     public int getCount() {
-        return _models.size();
+        return _dao.getAll().size();
     }
 
     @Override
     public Object getItem(int i) {
-        return _models.get(i);
+        return _dao.getAll().get(i);
     }
 
     @Override
@@ -43,15 +40,18 @@ public class IdeaListViewAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             LayoutInflater inflater = ((Activity) _context).getLayoutInflater();
-            convertView = inflater.inflate(R.layout.fragment_idea_master, parent, false);
+            convertView = inflater.inflate(R.layout.partial_idea_master, parent, false);
         }
 
         TextView title = (TextView) convertView.findViewById(R.id.title);
         TextView description = (TextView) convertView.findViewById(R.id.description);
+        TextView created = (TextView) convertView.findViewById(R.id.created);
+
         IdeaModel model = (IdeaModel) getItem(position);
 
         title.setText(model.getTitle());
         description.setText(model.getDescription());
+        created.setText(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(model.getCreated()));
         return convertView;
     }
 }

@@ -12,10 +12,7 @@ public class AddIdeaActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_idea);
-
-
-        _dao = new SQLiteIdeaDAO(this);
-        _dao.open();
+        _dao = SQLiteIdeaDAO.getInstance(this);
     }
 
     public void saveTask(View view) {

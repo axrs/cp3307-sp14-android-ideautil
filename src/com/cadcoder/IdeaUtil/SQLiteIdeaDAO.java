@@ -15,6 +15,7 @@ import java.util.List;
 
 public class SQLiteIdeaDAO {
 
+    private static SQLiteIdeaDAO _instance;
     private SQLiteDatabase _db;
     private SQLiteIdeaHelper _helper;
     private String[] _columns = {
@@ -25,12 +26,22 @@ public class SQLiteIdeaDAO {
             SQLiteIdeaHelper.COLUMN_MODIFIED
     };
 
-    public SQLiteIdeaDAO(Context context) {
+    public static SQLiteIdeaDAO getInstance(Context context) {
+        if (_instance == null) {
+            _instance = new SQLiteIdeaDAO(context.getApplicationContext());
+            _instance.open();
+        }
+        return _instance;
+    }
+
+    protected SQLiteIdeaDAO(Context context) {
         _helper = new SQLiteIdeaHelper(context);
     }
 
     public void open() {
-        _db = _helper.getWritableDatabase();
+        if (_db == null) {
+            _db = _helper.getWritableDatabase();
+        }
     }
 
     public void close() {

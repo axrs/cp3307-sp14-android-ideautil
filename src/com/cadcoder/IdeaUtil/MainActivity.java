@@ -10,7 +10,6 @@ import android.widget.ListView;
 import java.util.List;
 
 public class MainActivity extends Activity {
-    private SQLiteIdeaDAO _dao;
     private static final int IDEA_SAVED = 1;
 
     /**
@@ -20,19 +19,13 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        _dao = new SQLiteIdeaDAO(this);
-        _dao.open();
-
-        List<IdeaModel> modelList = _dao.getAll();
-        IdeaListViewAdapter adapter = new IdeaListViewAdapter(this, modelList);
+        IdeaListViewAdapter adapter = new IdeaListViewAdapter(this);
         ListView modelView = (ListView) findViewById(R.id.modelView);
         modelView.setAdapter(adapter);
     }
 
     private void refreshListView() {
         ListView modelView = (ListView) findViewById(R.id.modelView);
-        ((IdeaListViewAdapter) modelView.getAdapter()).setModels(_dao.getAll());
         ((IdeaListViewAdapter) modelView.getAdapter()).notifyDataSetChanged();
         Log.e("HERE", "update");
     }

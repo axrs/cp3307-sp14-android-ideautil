@@ -79,6 +79,18 @@ public class SQLiteIdeaDAO {
         return outModel;
     }
 
+    public void update(IdeaModel inModel) {
+
+        ContentValues values = new ContentValues();
+        values.put(SQLiteIdeaHelper.COLUMN_TITLE, inModel.getTitle());
+        values.put(SQLiteIdeaHelper.COLUMN_DESCRIPTION, inModel.getDescription());
+        values.put(SQLiteIdeaHelper.COLUMN_CREATED, formatDate(inModel.getCreated()));
+        values.put(SQLiteIdeaHelper.COLUMN_MODIFIED, formatDate(inModel.getModified()));
+
+        _db.update(SQLiteIdeaHelper.TABLE_NAME, values, SQLiteIdeaHelper.COLUMN_ID + " = " + inModel.getId(), null);
+    }
+
+
     public void delete(IdeaModel inModel) {
         _db.delete(SQLiteIdeaHelper.TABLE_NAME, SQLiteIdeaHelper.COLUMN_ID + "=" + inModel.getId(), null);
     }

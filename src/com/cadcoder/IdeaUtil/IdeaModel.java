@@ -1,9 +1,12 @@
 package com.cadcoder.IdeaUtil;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Basic IdeaModel class
  */
-public class IdeaModel extends DatabaseModel {
+public class IdeaModel extends DatabaseModel implements Parcelable {
 
     private String _title;
     private String _description;
@@ -15,6 +18,14 @@ public class IdeaModel extends DatabaseModel {
     public IdeaModel(String title) {
         super();
         setTitle(title);
+    }
+
+    public IdeaModel(Parcel parcel) {
+        setId(parcel.readLong());
+        setTitle(parcel.readString());
+        setDescription(parcel.readString());
+        setCreated(parcel.readString());
+        setModified(parcel.readString());
     }
 
     public String getTitle() {
@@ -42,4 +53,31 @@ public class IdeaModel extends DatabaseModel {
         this._description = description;
         setModified();
     }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeLong(getId());
+        parcel.writeString(getTitle());
+        parcel.writeString(getDescription());
+        parcel.writeString(getCreatedString());
+        parcel.writeString(getModifiedString());
+    }
+
+    public static final Creator<IdeaModel> CREATOR = new Creator<IdeaModel>() {
+        @Override
+        public IdeaModel createFromParcel(Parcel parcel) {
+            return new IdeaModel(parcel);
+        }
+
+        @Override
+        public IdeaModel[] newArray(int i) {
+            return new IdeaModel[i];
+        }
+    };
 }

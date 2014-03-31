@@ -12,7 +12,7 @@ public class SqliteIdeaHelper extends SQLiteOpenHelper {
 
     public static final String TABLE_NAME = "ideas";
     public static final String COLUMN_ID = "id";
-    public static final String COLUMN_DESCRIPTION = "desc";
+    public static final String COLUMN_DESCRIPTION = "description";
     public static final String COLUMN_TITLE = "title";
     public static final String COLUMN_CREATED = "created";
     public static final String COLUMN_MODIFIED = "modified";

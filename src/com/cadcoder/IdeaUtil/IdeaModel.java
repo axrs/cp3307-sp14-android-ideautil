@@ -1,32 +1,20 @@
 package com.cadcoder.IdeaUtil;
 
-import java.util.Date;
-
 /**
  * Basic IdeaModel class
  */
-public class IdeaModel {
+public class IdeaModel extends DatabaseModel {
 
     private String _title;
     private String _description;
-    private Date _created = new Date();
-    private Date _modified;
-
-    private boolean _isDirty = false;
 
     public IdeaModel() {
-        initTimeStamps();
+        super();
     }
 
-    public IdeaModel(String _title) {
-        this._title = _title;
-        initTimeStamps();
-    }
-
-    private void initTimeStamps() {
-        Date d = new Date();
-        _created = d;
-        _modified = d;
+    public IdeaModel(String title) {
+        super();
+        setTitle(title);
     }
 
     public String getTitle() {
@@ -53,26 +41,5 @@ public class IdeaModel {
     public void setDescription(String description) {
         this._description = description;
         setModified();
-    }
-
-    public Date getCreated() {
-        return _created;
-    }
-
-    public void setCreated(Date created) {
-        this._created = created;
-    }
-
-    public Date getModified() {
-        return _modified;
-    }
-
-    private void setModified() {
-        _modified = new Date();
-        _isDirty = true;
-    }
-
-    public boolean isDirty() {
-        return _isDirty;
     }
 }
